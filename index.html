@@ -232,6 +232,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/单根继承结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jian">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/18/单根继承结构/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T20:53:56+08:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="单根继承结构"><a href="#单根继承结构" class="headerlink" title="单根继承结构"></a>单根继承结构</h2><p>在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。<br>在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？<br>单根继承的好处：  </p>
+<ol>
+<li><font color="#FF00FF">在单根继承结构中，所有的对象都具有一个共用接口。它们归根到底都有相同的基本类型。</font>（All objects in a singly rooted hierarchy have an interface in common, so they are all ultimately the same type）C++提供的继承结构无法确保所有的对象都属于同一个基本类型。从向后兼容的角度来看，这么做能更好地适应C模型。</li>
+<li><font color="#FF00FF">单根继承结构保证所有的对象都具备某些功能，所有对象可以很容易地在堆上创建，而参数传递也得到了简化。</font></li>
+<li><font color="#FF00FF">方便垃圾回收机制地实现。</font>java的垃圾回收一般采用可达性分析，而单根继承结构使得寻找垃圾所在位置变得方便。</li>
+<li><font color="#FF00FF">方便异常处理。</font>写异常函数的时候不会因为不知道要抛出哪个异常类型而陷入僵局。给编程带来了极大的灵活性。</li>
+</ol>
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>Java的每一个类都由Object扩展而来。</p>
+<pre><code>public final native Class&lt;?&gt; getClass();
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/青年在选择职业时的考虑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -545,7 +673,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
