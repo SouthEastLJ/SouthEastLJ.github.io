@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="title:单根继承结构在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用">
+<meta name="description" content="在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用接口。它们归根到底都有相同">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="单根继承结构">
 <meta property="og:url" content="http://yoursite.com/2019/04/18/单根继承结构/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title:单根继承结构在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用">
+<meta property="og:description" content="在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用接口。它们归根到底都有相同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-18T13:03:22.023Z">
+<meta property="og:updated_time" content="2019-04-18T13:05:20.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title:单根继承结构在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用">
+<meta name="twitter:title" content="单根继承结构">
+<meta name="twitter:description" content="在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？单根继承的好处：    在单根继承结构中，所有的对象都具有一个共用接口。它们归根到底都有相同">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | Hexo</title>
+  <title>单根继承结构 | Hexo</title>
   
 
 
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">单根继承结构</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,7 @@
       
 
       
-        <hr>
-<h2 id="title-单根继承结构"><a href="#title-单根继承结构" class="headerlink" title="title:单根继承结构"></a>title:单根继承结构</h2><p>在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。<br>在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？<br>单根继承的好处：  </p>
+        <p>在面向对象的编程语言中，大部分不支持多根继承（Multiple inheritance）。仅有C++为了保证向后对于C的兼容性，支持多根继承。<br>在Java中，所有的对象最终都继承自一个单一的基类——Object。这种单根继承的好处是什么呢？为什么除了C++之外，几乎所有的面向对象的编程语言都采用了单根继承呢？<br>单根继承的好处：  </p>
 <ol>
 <li><font color="#FF00FF">在单根继承结构中，所有的对象都具有一个共用接口。它们归根到底都有相同的基本类型。</font>（All objects in a singly rooted hierarchy have an interface in common, so they are all ultimately the same type）C++提供的继承结构无法确保所有的对象都属于同一个基本类型。从向后兼容的角度来看，这么做能更好地适应C模型。</li>
 <li><font color="#FF00FF">单根继承结构保证所有的对象都具备某些功能，所有对象可以很容易地在堆上创建，而参数传递也得到了简化。</font></li>
@@ -459,7 +458,7 @@ code here;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title-单根继承结构"><span class="nav-number">1.</span> <span class="nav-text">title:单根继承结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object"><span class="nav-number">1.0.1.</span> <span class="nav-text">Object</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object"><span class="nav-number">1.</span> <span class="nav-text">Object</span></a></li></ol></div>
             
 
           </div>
