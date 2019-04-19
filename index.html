@@ -310,13 +310,48 @@
 <li><font color="#FF00FF">方便垃圾回收机制地实现。</font>java的垃圾回收一般采用可达性分析，而单根继承结构使得寻找垃圾所在位置变得方便。</li>
 <li><font color="#FF00FF">方便异常处理。</font>写异常函数的时候不会因为不知道要抛出哪个异常类型而陷入僵局。给编程带来了极大的灵活性。</li>
 </ol>
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>Java的每一个类都由Object扩展而来。</p>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>Java的每一个类都由Object扩展而来。  </p>
 <pre><code>public final native Class&lt;?&gt; getClass();
-</code></pre><pre><code class="php"><span class="meta">&lt;?php</span> 
-code here;
-<span class="meta">?&gt;</span>
-</code></pre>
 
+public native int hashCode();
+</code></pre><h4 id="equals："><a href="#equals：" class="headerlink" title="equals："></a>equals：</h4><pre><code>public boolean equals(Object obj) {
+    return (this == obj);
+}
+</code></pre><p>在Objects类中，equals方法将判断两个对象是否有相同的引用。 <font color="#FF00FF">然而，对于多数类来说，这种判断没有什么意义。</font>我们经常来检测两个对象状态的相等性，如果两个对象的状态相等，那么这两个对象是相等的。<br>下面代码介绍的是一个经典的equals方法：</p>
+<pre><code>class Student  
+{ 
+    .....
+    @Override
+    public boolean equals(Object obj) 
+    { 
+
+    // checking if both the object references are  
+    // referring to the same object. 
+    if(this == obj) 
+            return true; 
+
+        // it checks if the argument is of the  
+        // type Student by comparing the classes  
+        // of the passed argument and this object. 
+
+        // if(!(obj instanceof Geek)) return false; ---&gt; avoid. 
+
+        if(obj == null || obj.getClass()!= this.getClass()) 
+            return false; 
+
+        // type casting of the argument.  
+        Student s1 = (Student) obj; 
+
+        // comparing the state of argument with  
+        // the state of &apos;this&apos; Object. 
+        return (s1.name == this.name &amp;&amp; s1.id == this.id); 
+    } 
+}
+</code></pre><p>假如obj是Student的子类，使用下面这句代码<font color="#FF00FF">会</font>返回false  </p>
+<pre><code>if(obj == null || obj.getClass()!= this.getClass()) 
+</code></pre><p> r如果传递的参数是Student类的子类，则instanceof运算符条件<font color="#FF00FF">不会</font>返回false。</p>
+<pre><code>if(!(obj instanceof Geek)) return false;
+</code></pre>
           
         
       
