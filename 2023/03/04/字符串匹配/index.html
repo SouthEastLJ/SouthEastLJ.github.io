@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="liujian's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="一个简单的假设例子：正文： …….模式字符串： B A A A A其中，正文长度为N，模式字符串长度为M，一般来说N&amp;gt;&amp;gt;M。我们先来做一个假设，假设正文中仅有A和B两个字符组成。那么如果第五个字符匹配失败，可知正文对应部分肯定为B A A A B。那么此时，我们没有必要去回退文本指针i，因为正文对应部分的第2-4个字符均为A,都和模式字符串的第一个字符B不相匹配。这时我们可以直接将i加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="清晰易懂地介绍KMP算法">
+<meta property="og:url" content="http://yoursite.com/2023/03/04/字符串匹配/index.html">
+<meta property="og:site_name" content="liujian&#39;s blog">
+<meta property="og:description" content="一个简单的假设例子：正文： …….模式字符串： B A A A A其中，正文长度为N，模式字符串长度为M，一般来说N&amp;gt;&amp;gt;M。我们先来做一个假设，假设正文中仅有A和B两个字符组成。那么如果第五个字符匹配失败，可知正文对应部分肯定为B A A A B。那么此时，我们没有必要去回退文本指针i，因为正文对应部分的第2-4个字符均为A,都和模式字符串的第一个字符B不相匹配。这时我们可以直接将i加">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/SouthEastLJ/MarkDownPictures/master/%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8C%87%E9%92%88%E5%9C%A8%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE%E4%B8%AD%E7%9A%84%E5%9B%9E%E9%80%80.JPG">
+<meta property="og:updated_time" content="2019-05-09T09:31:04.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="清晰易懂地介绍KMP算法">
+<meta name="twitter:description" content="一个简单的假设例子：正文： …….模式字符串： B A A A A其中，正文长度为N，模式字符串长度为M，一般来说N&amp;gt;&amp;gt;M。我们先来做一个假设，假设正文中仅有A和B两个字符组成。那么如果第五个字符匹配失败，可知正文对应部分肯定为B A A A B。那么此时，我们没有必要去回退文本指针i，因为正文对应部分的第2-4个字符均为A,都和模式字符串的第一个字符B不相匹配。这时我们可以直接将i加">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SouthEastLJ/MarkDownPictures/master/%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8C%87%E9%92%88%E5%9C%A8%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE%E4%B8%AD%E7%9A%84%E5%9B%9E%E9%80%80.JPG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/03/04/字符串匹配/">
+
+
+
+
+
+  <title>清晰易懂地介绍KMP算法 | liujian's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/03/04/字符串匹配/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jian">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">清晰易懂地介绍KMP算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-04T22:02:43+08:00">
+                2023-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一个简单的假设"><a href="#一个简单的假设" class="headerlink" title="一个简单的假设"></a>一个简单的假设</h4><p>例子：<br>正文： …….<br>模式字符串： B A A A A<br>其中，正文长度为N，模式字符串长度为M，一般来说N&gt;&gt;M。<br>我们先来做一个假设，假设正文中仅有A和B两个字符组成。那么如果<strong>第五个</strong>字符匹配失败，可知正文对应部分肯定为B A A A B。那么此时，我们没有必要去回退文本指针i，因为正文对应部分的第2-4个字符均为A,都和模式字符串的第一个字符B不相匹配。<strong>这时我们可以直接将i加1，以比较文本的下一字符和模式字符串中的第二个字符。</strong><font color="#FF0000">这样我们最多仅仅会进行N次字符串比较。这样我们最多仅仅会进行N次字符串比较。</font><font color="#FF0000">上述情况是很特殊的，但其思想是值得思考的，那么我们可以将这种思想抽象化以使得其可以适用于所有情况吗？</font><br>暴力求解法如图所示：<br><img src="https://raw.githubusercontent.com/SouthEastLJ/MarkDownPictures/master/%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8C%87%E9%92%88%E5%9C%A8%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE%E4%B8%AD%E7%9A%84%E5%9B%9E%E9%80%80.JPG" alt="GitHub" title="GitHub,Social Coding" width="450" height="250"></p>
+<p>可以看到，上述暴力算法中，很多指针i的移动时没有必要的。为了提升字符串匹配算法的性能，我们将介绍一个经典的且令人印象深刻的算法：<strong>Knuth-Morris-Pratt算法</strong>。</p>
+<h4 id="KMP算法的创新"><a href="#KMP算法的创新" class="headerlink" title="KMP算法的创新"></a>KMP算法的创新</h4><p>在介绍KMP算法的具体实现之前，先来介绍KMP算法的创新之处：<br>当出现不匹配时，就能知晓一部分文本的内容，可以利用这些信息避免讲指针回退到所有这些已知的字符之前。<br>此算法的通用性令人印象深刻:<font color="#FF0000"><strong>在匹配失败时从能将模式字符串指针j设置为某个值以使文本指针i不回退</strong>  </font>  </p>
+<p>（if the beginning part of a string is appearing again somewehere else in the string then don’t again compare the characters right avoid the comparison and don’t move i back again like it was happening in basic algorithm.）</p>
+<h4 id="详细介绍KMP算法"><a href="#详细介绍KMP算法" class="headerlink" title="详细介绍KMP算法"></a>详细介绍KMP算法</h4><p>下面，我们会从<font color="#FF0000"><strong>前缀</strong></font>和<font color="#FF0000"><strong>后缀</strong></font>的角度来详细讲解KMP算法。   </p>
+<p>对于一个模式字符串“ abcdabc ”来说，其前缀和后缀分别为：<br>prefix:<font color="#0000CD">a,ab,abc,abcd,abcda,abcdab </font><br>suffix:<font color="#0000CD">c,bc,abc,dabc,cdabc,bcdabc </font><br>对于这个字符串来说，其前缀和后缀中都有“abc”,即“abc”这个子字符串重复出现了。<br>为了记录这种重复性，生成一个数组。对于这个数组，我们称之为LPS（longest prefix which is same as some suffix）<br>下面举几个例子来说明LPS中的值怎么根据模式字符串来生成。  </p>
+<ol>
+<li>a b c d a b e a b f<br>&#160;&#160;    0 0 0 0 1 2 0 1 2 0(LPS)    </li>
+<li>a b c d e a b f a b c<br>&#160; &#160;     0 0 0 0 0 1 2 0 1 2 3(LPS)  </li>
+</ol>
+<p>在得到了LPS数组后，KMP算法的后续工作也就比较简单了。下面我们将从一个例子入手，去介绍剩下的过程。  </p>
+<p>tex: a b a b c a b c a b a b a b d  </p>
+<p>pattern: a b a b d<br>根据模式字符串pattern，我们得到LPS数组为：-1 0 0 1 2 0  (在最前面设为-1是为了编程方便，也可以不加)<br>设指向tex的指针为i,指向pattern的指针为j。<br>当i指向5，j指向5的时候，<font color="#FF0000"><strong>字符不匹配,根据LPS数组来回退j</strong></font>。此时LPS的第j个值为2，所以j回退到2，i不变，继续比较。字符仍不匹配，j回退到0，i不变，继续比较。重复上述过程，即可得到最后的匹配结果。</p>
+<p>具体的代码实现：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span>[] getNext(<span class="built_in">String</span> pattern) &#123;</span><br><span class="line">    <span class="built_in">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> k = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">len</span> = pattern.length();</span><br><span class="line">    <span class="built_in">int</span> []<span class="keyword">next</span> = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="built_in">len</span>+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">next</span>[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (j &lt; <span class="built_in">len</span> - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || pattern.charAt(k) == pattern.charAt(j)) &#123;</span><br><span class="line">            ++k;</span><br><span class="line">            ++j;</span><br><span class="line">            <span class="keyword">next</span>[j] = k;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            k = <span class="keyword">next</span>[k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="keyword">next</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> kmp(<span class="built_in">String</span> tex, <span class="built_in">String</span> pattern) &#123;</span><br><span class="line">    <span class="built_in">int</span> tlen = tex.length();</span><br><span class="line">    <span class="built_in">int</span> plen = pattern.length();</span><br><span class="line">    <span class="built_in">int</span> []<span class="keyword">next</span> = getNext(pattern);</span><br><span class="line">    <span class="built_in">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;tlen &amp;&amp; j&lt;plen)&#123;</span><br><span class="line">        <span class="keyword">if</span>(tex.charAt(i)==pattern.charAt(j))&#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">next</span>[j]==<span class="number">-1</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">                j=<span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                j = <span class="keyword">next</span>[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j==plen) return i-j;</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>暴力匹配的代码实现：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int strStr1(String haystack, String needle) &#123;</span><br><span class="line">       char []arrays = haystack.toCharArray();</span><br><span class="line">       char []mapp = needle.toCharArray();</span><br><span class="line">       <span class="keyword">if</span>(mapp.<span class="built_in">length</span>==<span class="number">0</span> &amp;&amp; arrays.<span class="built_in">length</span>==<span class="number">0</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">if</span>(mapp.<span class="built_in">length</span>==<span class="number">0</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">if</span>(arrays.<span class="built_in">length</span>==<span class="number">0</span> || arrays.<span class="built_in">length</span>&lt;mapp.<span class="built_in">length</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">       int flag = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span>(int <span class="built_in">i</span>=<span class="number">0</span>;<span class="built_in">i</span>&lt;arrays.<span class="built_in">length</span>;<span class="built_in">i</span>++)&#123;</span><br><span class="line">           <span class="keyword">if</span>(arrays[<span class="built_in">i</span>]==mapp[<span class="number">0</span>])&#123;</span><br><span class="line">               flag = <span class="number">0</span>;</span><br><span class="line">               int k = <span class="built_in">i</span>;</span><br><span class="line">               <span class="keyword">for</span>(int <span class="built_in">j</span>=<span class="number">0</span>;<span class="built_in">j</span>&lt;mapp.<span class="built_in">length</span>;<span class="built_in">j</span>++)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(k&lt;arrays.<span class="built_in">length</span> &amp;&amp; arrays[k]==mapp[<span class="built_in">j</span>] )&#123;</span><br><span class="line">                       ++k;</span><br><span class="line">                       ++flag;</span><br><span class="line">                   &#125;</span><br><span class="line">                   <span class="keyword">else</span>&#123;</span><br><span class="line">                       <span class="keyword">break</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span>(flag == mapp.<span class="built_in">length</span>)&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="built_in">i</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：<br>KMP为O(m+n)<br>暴力匹配为O(mn)<br>其中，m为tex长度，n为pattern长度。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/03/04/在Intellij中使用Debug/" rel="next" title="在Intellij中使用Debug">
+                <i class="fa fa-chevron-left"></i> 在Intellij中使用Debug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/04/热爱/" rel="prev" title="热爱">
+                热爱 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Liu Jian</p>
+              <p class="site-description motion-element" itemprop="description">按照自己的方式，去度过人生。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SouthEastLJ" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="sdycliujian@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个简单的假设"><span class="nav-number">1.</span> <span class="nav-text">一个简单的假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KMP算法的创新"><span class="nav-number">2.</span> <span class="nav-text">KMP算法的创新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#详细介绍KMP算法"><span class="nav-number">3.</span> <span class="nav-text">详细介绍KMP算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Jian</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

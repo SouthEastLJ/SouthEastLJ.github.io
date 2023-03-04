@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="liujian's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="数据库数据库基础《Designing Data-Intensive Application》 （DDIA，数据密集型应用系统设计）这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。 虽然我将这本书我将其归类为数据库基础，但是实际上其涵盖的内容远远超过了数据库基础，它还讲了分布式数据库、数据分区、事务、分布式系统等内容。 这本书介绍的大部分概念你可能之前都听过，但是在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="豆瓣高分技术书籍">
+<meta property="og:url" content="http://yoursite.com/2023/03/04/豆瓣高分技术书籍/index.html">
+<meta property="og:site_name" content="liujian&#39;s blog">
+<meta property="og:description" content="数据库数据库基础《Designing Data-Intensive Application》 （DDIA，数据密集型应用系统设计）这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。 虽然我将这本书我将其归类为数据库基础，但是实际上其涵盖的内容远远超过了数据库基础，它还讲了分布式数据库、数据分区、事务、分布式系统等内容。 这本书介绍的大部分概念你可能之前都听过，但是在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-10-26T14:51:44.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="豆瓣高分技术书籍">
+<meta name="twitter:description" content="数据库数据库基础《Designing Data-Intensive Application》 （DDIA，数据密集型应用系统设计）这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。 虽然我将这本书我将其归类为数据库基础，但是实际上其涵盖的内容远远超过了数据库基础，它还讲了分布式数据库、数据分区、事务、分布式系统等内容。 这本书介绍的大部分概念你可能之前都听过，但是在">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2023/03/04/豆瓣高分技术书籍/">
+
+
+
+
+
+  <title>豆瓣高分技术书籍 | liujian's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujian's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/03/04/豆瓣高分技术书籍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jian">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujian's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">豆瓣高分技术书籍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-04T22:02:43+08:00">
+                2023-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/书籍/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h3><p><strong>《Designing Data-Intensive Application》</strong> （DDIA，数据密集型应用系统设计）这本书强推一波，值得读很多遍！豆瓣有接近 90% 的人看了这本书之后给了五星好评。</p>
+<p>虽然我将这本书我将其归类为数据库基础，但是实际上其涵盖的内容远远超过了数据库基础，它还讲了分布式数据库、数据分区、事务、分布式系统等内容。</p>
+<p>这本书介绍的大部分概念你可能之前都听过，但是在看了书中的内容之后，你可能会豁然开朗：“哇塞！原来是这样的啊！这不是某技术的原理么？”。</p>
+<p><strong>《数据库系统概念》</strong> 这本书涵盖了数据库系统的全套概念，知识体系清晰，是学习数据库系统非常经典的教材！不是参考书！</p>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>强推一波 <strong>《MySQL 是怎样运行的》</strong> 这本书，内容很适合拿来准备面试。讲的很细节，但又不枯燥，内容非常良心！</p>
+<p><strong>《高性能 MySQL》</strong> 属于进阶 MySQL 必看的一本书，不太适合用来入门 MySQL，毕竟主要讲的是 MySQL 底层原理和性能提升相关的东西，侧重点在于教你如何更好地使用 MySQL，而不是如何使用 MySQL。</p>
+<p>既有有理论，又有实践！如果你没时间都看一遍的话，我建议第 5 章（创建高性能的索引） 、第 6 章（查询性能优化） 你一定要认真看一下。</p>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>很经典的一本 Redis 书籍，出版 7 年，一共印刷了 24 次。。</p>
+<h2 id="Java-基础"><a href="#Java-基础" class="headerlink" title="Java 基础"></a>Java 基础</h2><p><strong>《Java 核心技术卷 1+卷 2》</strong> 这两本 Java 基础相关的书籍非常不错。不过，这两本书的内容很多，全看的话比较费时间。</p>
+<p>我现在是把这两本书当做工具书来用，就比如我平时写文章的时候，碰到一些 Java 基础方面的问题，经常就翻看这两本来当做参考！</p>
+<h2 id="Java-并发"><a href="#Java-并发" class="headerlink" title="Java 并发"></a>Java 并发</h2><p><strong>《Java 并发实现原理：JDK 源码剖析》</strong> 这本书是 2020 年新出的，所以，现在知道的人还不是很多。不过，强烈推荐，内容非常不错！</p>
+<p>这本书主要是对 Java Concurrent 包中一些比较重要的源码进行了讲解，另外，像 JMM、happen-before、CAS 等等比较重要的并发知识这本书也都会一并介绍到。</p>
+<p>不论是你想要深入研究 Java 并发，还是说要准备面试，你都可以看看这本书。</p>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p>对于 Java 程序员来说，JVM 帮助我们做了很多事情比如内存管理、垃圾回收等等。在 JVM 的帮助下，我们的程序出现内存泄漏这些问题的概率相对来说是比较低的。但是，这并不代表我们在日常开发工作中不会遇到。万一你在工作中遇到了 OOM 问题，你至少要知道如何去排查和解决问题吧！</p>
+<p>并且，就单纯从面试角度来说，JVM 是 Java 后端面试（大厂）中非常重要的一环。不论是应届还是社招，面试国内的一些大厂，你都会被问到很多 JVM 相关的问题（应届的话侧重理论，社招实践）。</p>
+<p>只有搞懂了 JVM 才有可能真正把 Java 语言“吃透”。学习 JVM 这部分的内容，一定要注意要实战和理论结合。</p>
+<p><strong>《深入理解 Java 虚拟机》</strong> 这本书就一句话形容：<strong>国产书籍中的战斗机，实实在在的优秀！</strong> （真心希望国内能有更多这样的优质书籍出现！加油！💪）</p>
+<p>这本书的第 3 版 2019 年底已经出来了，新增了很多实在的内容比如 ZGC 等新一代 GC 的原理剖析。目前豆瓣上是 9.5 的高分，🐂 不 🐂 我就不多说了！</p>
+<p>不论是你面试还是你想要在 Java 领域学习的更深，你都离不开这本书籍。这本书不光要看，你还要多看几遍，里面都是干货。这本书里面还有一些需要自己实践的东西，我建议你也跟着实践一下。</p>
+<h2 id="代码质量"><a href="#代码质量" class="headerlink" title="代码质量"></a>代码质量</h2><p><strong>《Effective Java 》</strong> 这本书是 Java 领域国宝级别的书，非常经典。Java 程序员必看！</p>
+<p>这本书主要介绍了在 Java 编程中很多极具实用价值的经验规则，这些经验规则涵盖了大多数开发人员每天所面临的问题的解决方案。这篇文章能够非常实际地帮助你写出更加清晰、健壮和高效的代码。本书中的每条规则都以简短、独立的小文章形式出现，并通过例子代码加以进一步说明。</p>
+<p><strong>《重构》</strong> 可以说是程序员的必看书籍！无需多言。编程书籍领域的瑰宝。</p>
+<p>世界顶级、国宝级别的 Martin Fowler 的书籍，可以说是软件开发领域最经典的几本书之一。目前已经出了第二版。</p>
+<h2 id="程序员职业素养"><a href="#程序员职业素养" class="headerlink" title="程序员职业素养"></a>程序员职业素养</h2><p><strong>《 The Clean Coder》</strong> 是 Bob 大叔的又一经典著作。</p>
+<p>《Clean Code》和《 The Clean Coder》这两本书在国内都翻译为 《代码整洁之道》，我觉得这个翻译还是不够优雅的。</p>
+<p>另外，两者的内容差异也很大。《Clean Code》这本书从代码层面来讲解如何提高自己的代码质量。而《The Clean Coder》这本书则是从如何成为一名更优秀的开发者的角度来写的，比如这书会教你如何在自己的领域更专业、如何说不、如何做时间管理、如何处理压力等等。</p>
+<p><strong>《人月神话》</strong> 这本书主要描述了软件开发的基本定律：<strong>一个需要 10 天才能干完的活，不可能让 10 个人在 1 天干完！</strong></p>
+<p>看书名的第一眼，感觉不像是技术类的书籍。但是，就是这样一个看似和编程不沾边的书名，却成了编程领域长久相传的经典。</p>
+<p><strong>这本书对于现代软件尤其是复杂软件的开发的规范化有深刻的意义。</strong></p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>《凤凰架构》这本书是周志明老师多年架构和研发经验的总结，内容非常干货，深度与广度并存，理论结合实践！</p>
+<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p><strong>《从 Paxos 到 Zookeeper》</strong> 是一本带你入门分布式理论的好书。这本书主要介绍几种典型的分布式一致性协议，以及解决分布式一致性问题的思路，其中重点讲解了 Paxos 和 ZAB 协议。</p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p><strong>《微服务架构设计模式》</strong> 这本书是世界十大软件架构师之一、微服务架构先驱 Chris Richardson 亲笔撰写，豆瓣评分 9.6。示例代码使用 Java 语言和 Spring 框架。帮助你设计、实现、测试和部署基于微服务的应用程序。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/03/04/热爱/" rel="next" title="热爱">
+                <i class="fa fa-chevron-left"></i> 热爱
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/04/青年在选择职业时的考虑/" rel="prev" title="青年在选择职业时的考虑">
+                青年在选择职业时的考虑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Liu Jian</p>
+              <p class="site-description motion-element" itemprop="description">按照自己的方式，去度过人生。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SouthEastLJ" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="sdycliujian@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库基础"><span class="nav-number">1.1.</span> <span class="nav-text">数据库基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis"><span class="nav-number">1.3.</span> <span class="nav-text">Redis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-基础"><span class="nav-number">2.</span> <span class="nav-text">Java 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-并发"><span class="nav-number">3.</span> <span class="nav-text">Java 并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">4.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码质量"><span class="nav-number">5.</span> <span class="nav-text">代码质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序员职业素养"><span class="nav-number">6.</span> <span class="nav-text">程序员职业素养</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">7.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式"><span class="nav-number">8.</span> <span class="nav-text">分布式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微服务"><span class="nav-number">9.</span> <span class="nav-text">微服务</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Jian</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
