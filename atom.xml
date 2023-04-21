@@ -6,7 +6,7 @@
   <link href="https://southeastlj.github.io/atom.xml" rel="self"/>
   
   <link href="https://southeastlj.github.io/"/>
-  <updated>2023-03-05T01:13:36.313Z</updated>
+  <updated>2023-04-21T14:04:07.494Z</updated>
   <id>https://southeastlj.github.io/</id>
   
   <author>
@@ -17,19 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>随感</title>
+    <link href="https://southeastlj.github.io/2023/04/21/%E9%9A%8F%E6%84%9F/"/>
+    <id>https://southeastlj.github.io/2023/04/21/%E9%9A%8F%E6%84%9F/</id>
+    <published>2023-04-21T14:27:16.000Z</published>
+    <updated>2023-04-21T14:04:07.494Z</updated>
+    
+    <content type="html"><![CDATA[<p>### </p><p>你到这个世界上来，你终究是要面临死亡的。这就是一个人，他无论多厉害，多么嚣张，他都有终结的一天。那么在这段时间做什么呢，不断地看书，懂得这个世界的很多东西，知道这个世界的规律，那是一种无比的喜悦。</p><p>历史这个东西，太深奥了。我无论身处在多小的房间里，我只要翻开这本书我就是在看大海，它记述了无数人的一辈子。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;### &lt;/p&gt;
+&lt;p&gt;你到这个世界上来，你终究是要面临死亡的。这就是一个人，他无论多厉害，多么嚣张，他都有终结的一天。那么在这段时间做什么呢，不断地看书，懂得这个世界的很多东西，知道这个世界的规律，那是一种无比的喜悦。&lt;/p&gt;
+&lt;p&gt;历史这个东西，太深奥了。我无论身处在多</summary>
+      
+    
+    
+    
+    
+    <category term="日记" scheme="https://southeastlj.github.io/tags/日记/"/>
+    
+  </entry>
+  
+  <entry>
     <title>想说什么就说出来</title>
     <link href="https://southeastlj.github.io/2023/03/04/%E6%83%B3%E8%AF%B4%E4%BB%80%E4%B9%88%E5%B0%B1%E8%AF%B4%E5%87%BA%E6%9D%A5/"/>
     <id>https://southeastlj.github.io/2023/03/04/%E6%83%B3%E8%AF%B4%E4%BB%80%E4%B9%88%E5%B0%B1%E8%AF%B4%E5%87%BA%E6%9D%A5/</id>
     <published>2023-03-04T15:27:16.000Z</published>
-    <updated>2023-03-05T01:13:36.313Z</updated>
+    <updated>2023-04-21T13:56:26.347Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="孟烦了"><a href="#孟烦了" class="headerlink" title="孟烦了"></a>孟烦了</h3><p>我要是你，想说什么都说出来，都憋在心里，显得太聪明了。</p><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">%</span>- image_tag<span class="comment">(想说什么就说出来/图片1.jpg)</span> <span class="meta">%</span>&gt;</span><br></pre></td></tr></table></figure><p><img src="/.io//图片1.jpg" alt></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="孟烦了"><a href="#孟烦了" class="headerlink" title="孟烦了"></a>孟烦了</h3><p>我要是你，想说什么都说出来，都憋在心里，显得太聪明了。</p>]]></content>
     
     
       
       
     <summary type="html">&lt;h3 id=&quot;孟烦了&quot;&gt;&lt;a href=&quot;#孟烦了&quot; class=&quot;headerlink&quot; title=&quot;孟烦了&quot;&gt;&lt;/a&gt;孟烦了&lt;/h3&gt;&lt;p&gt;我要是你，想说什么都说出来，都憋在心里，显得太聪明了。&lt;/p&gt;
-&lt;figure class=&quot;highlight gcode&quot;&gt;&lt;t</summary>
+</summary>
       
     
     
